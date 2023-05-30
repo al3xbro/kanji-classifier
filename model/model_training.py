@@ -1,7 +1,6 @@
-import os
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
+from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 
 from dataset_creation import training_set
 from dataset_creation import validation_set
