@@ -11,6 +11,7 @@ IMAGE_DIRECTORY = "data/images_processed"
 
 label_keys = list(sorted(os.listdir(IMAGE_DIRECTORY)))
 
+print("\n------------------------------------------------------")
 print("Creating training set")
 training_set = keras.preprocessing.image_dataset_from_directory(
     IMAGE_DIRECTORY,
@@ -25,6 +26,7 @@ training_set = keras.preprocessing.image_dataset_from_directory(
     subset="training"
 )
 
+print("\n------------------------------------------------------")
 print("Creating testing set")
 validation_set = keras.preprocessing.image_dataset_from_directory(
     IMAGE_DIRECTORY,

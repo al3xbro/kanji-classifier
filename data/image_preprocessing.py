@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageEnhance
+from PIL import Image
 
 # input and output directories
 INPUT_DIR = "data/images_original/ETL9G"
@@ -13,21 +13,21 @@ if not os.path.exists(OUTPUT_DIR):
 for label in os.listdir(INPUT_DIR):
 
     # creates a new output label directory if it doesn't exist
-    if (os.path.exists(OUTPUT_DIR + "/" + label)):
-        f = open(INPUT_DIR + "/" + label + "/" + ".char.txt", "r")
+    if (os.path.exists(os.path.join(OUTPUT_DIR, label))):
+        f = open(os.path.join(INPUT_DIR, label, ".char.txt"), "r")
         print("Processing existing set " + f.read())
         f.close()
     else:
-        os.mkdir(OUTPUT_DIR + "/" + label)
-        f = open(INPUT_DIR + "/" + label + "/" + ".char.txt", "r")
+        os.mkdir(os.path.join(OUTPUT_DIR, label))
+        f = open(os.path.join(INPUT_DIR, label, ".char.txt"), "r")
         print("Processing new set " + f.read())
         f.close()
 
     # processes each input file
-    for file in os.listdir(INPUT_DIR + "/" + label):
+    for file in os.listdir(os.path.join(INPUT_DIR, label)):
         if (file.endswith(".png")):
 
-            im = Image.open(INPUT_DIR + "/" + label + "/" + file)
+            im = Image.open(os.path.join(INPUT_DIR, label, file))
             newImData = []
             for pixel in im.getdata():
                 if pixel < 237:
@@ -42,11 +42,11 @@ for label in os.listdir(INPUT_DIR):
             # checks for file collisions
             newFileName = file
             # finds new name for collided file
-            while (os.path.isfile(OUTPUT_DIR + "/" + label + "/" + newFileName)):
+            while (os.path.isfile(os.path.join(OUTPUT_DIR, label, newFileName))):
                 print("File collision found for " + newFileName)
                 newFileName = "{:06d}".format(
                     int(newFileName[0:-4]) + 1) + ".png"
                 print("New file name is " + newFileName)
 
-            newIm.save(OUTPUT_DIR + "/" + label + "/" + newFileName)
+            newIm.save(os.path.join(OUTPUT_DIR, label, newFileName))
             im.close()
