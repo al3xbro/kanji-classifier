@@ -2,3 +2,4 @@ images_original
 images_processed
 __pycache__
 logs
+kanji_ocr.h5
