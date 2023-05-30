@@ -2,7 +2,7 @@ import os
 from PIL import Image, ImageEnhance
 
 # input and output directories
-INPUT_DIR = "data/images/ETL9G"
+INPUT_DIR = "data/images_original/ETL9G"
 OUTPUT_DIR = "data/images_processed"
 
 # makes output directory if doesn't exist
@@ -33,7 +33,7 @@ for label in os.listdir(INPUT_DIR):
                 if pixel < 237:
                     newImData.append(0)
                 else:
-                    newImData.append(255)
+                    newImData.append(1)
 
             newIm = Image.new(im.mode, im.size)
             newIm.putdata(newImData)
