@@ -9,14 +9,17 @@ for gpu in gpus:
 IMG_HEIGHT = 92
 IMG_WIDTH = 92
 BATCH_SIZE = 32
-IMAGE_DIRECTORY = "data/images_processed"
+IMAGES_PATH = "data/images_processed"
+CLASS_PATH = "model/label_keys.csv"
 
-label_keys = list(sorted(os.listdir(IMAGE_DIRECTORY)))
+class_file = open(CLASS_PATH, "w")
+class_keys = sorted(os.listdir(IMAGES_PATH))
+class_file.write(",".join(class_keys))
 
 print("\n====================================================================")
 print("Creating training set\n")
 training_set = keras.preprocessing.image_dataset_from_directory(
-    IMAGE_DIRECTORY,
+    IMAGES_PATH,
     labels="inferred",
     label_mode="int",
     color_mode="grayscale",
@@ -29,9 +32,9 @@ training_set = keras.preprocessing.image_dataset_from_directory(
 )
 
 print("\n====================================================================")
-print("Creating testing set\n")
+print("Creating validation set\n")
 validation_set = keras.preprocessing.image_dataset_from_directory(
-    IMAGE_DIRECTORY,
+    IMAGES_PATH,
     labels="inferred",
     label_mode="int",
     color_mode="grayscale",

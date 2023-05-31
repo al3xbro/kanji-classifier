@@ -5,11 +5,11 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout, BatchNor
 from dataset_creation import training_set
 from dataset_creation import validation_set
 
-MODEL_SAVE_PATH = "model/kanji_ocr.h5"
+MODEL_PATH = "model/kanji_ocr.h5"
 EPOCHS = 4
 
 print("\n====================================================================")
-print("Creating model\n")
+print("Training model\n")
 model = Sequential()
 
 model.add(Conv2D(16, (3, 3), 1, activation='relu', input_shape=(92, 92, 1)))
@@ -41,4 +41,4 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="logs")
 hist = model.fit(training_set, epochs=EPOCHS,
                  validation_data=validation_set, callbacks=[tensorboard_callback])
 
-model.save(MODEL_SAVE_PATH)
+model.save(MODEL_PATH)
