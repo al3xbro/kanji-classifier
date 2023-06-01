@@ -1,5 +1,0 @@
-MODEL_PATH = "model/kanji_ocr.h5"
-CLASS_PATH = "model/label_keys.csv"
-PREDICT_PATH = "model/Untitled-1.png"
-TRAINING_IMAGES_PATH = "data/images_processed"
-UNPROCESSED_IMAGES_PATH = "data/images_original/ETL9G"

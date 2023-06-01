@@ -2,7 +2,15 @@ import tensorflow as tf
 from tensorflow import keras
 
 import os
-from config import MODEL_PATH, CLASS_PATH, PREDICT_PATH, TRAINING_IMAGES_PATH, UNPROCESSED_IMAGES_PATH
+
+from configparser import ConfigParser
+config = ConfigParser()
+config.read("config.ini")
+MODEL_PATH = config.get("Paths", "MODEL_PATH")
+CLASS_PATH = config.get("Paths", "CLASS_PATH")
+PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
+TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
+UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
 # configures memory growth
 gpus = tf.config.list_physical_devices('GPU')
@@ -18,11 +26,12 @@ class_file = open(CLASS_PATH, "w")
 class_keys = sorted(os.listdir(TRAINING_IMAGES_PATH))
 class_file.write(",".join(class_keys))
 
+print("\n====================================================================")
+print("Creating training set\n")
+
 # returns a tf.data.Dataset object with tuple (images, labels)
 # where images has shape (10, 92, 92, 1),
 # and labels are an int32 tensor of shape (batch_size,)
-print("\n====================================================================")
-print("Creating training set\n")
 training_set = keras.preprocessing.image_dataset_from_directory(
     TRAINING_IMAGES_PATH,
     labels="inferred",
@@ -38,6 +47,7 @@ training_set = keras.preprocessing.image_dataset_from_directory(
 
 print("\n====================================================================")
 print("Creating validation set\n")
+
 validation_set = keras.preprocessing.image_dataset_from_directory(
     TRAINING_IMAGES_PATH,
     labels="inferred",

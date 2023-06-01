@@ -4,12 +4,21 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout, BatchNor
 
 from dataset_creation import training_set
 from dataset_creation import validation_set
-from config import MODEL_PATH, CLASS_PATH, PREDICT_PATH, TRAINING_IMAGES_PATH, UNPROCESSED_IMAGES_PATH
+
+from configparser import ConfigParser
+config = ConfigParser()
+config.read("config.ini")
+MODEL_PATH = config.get("Paths", "MODEL_PATH")
+CLASS_PATH = config.get("Paths", "CLASS_PATH")
+PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
+TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
+UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
 EPOCHS = 4
 
 print("\n====================================================================")
 print("Building model\n")
+
 model = Sequential()
 
 model.add(Conv2D(16, (5, 5), 1, activation='relu', input_shape=(92, 92, 1)))
@@ -38,7 +47,10 @@ print("\n====================================================================")
 print("Training\n")
 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="logs")
-model.fit(training_set, epochs=EPOCHS,
-          validation_data=validation_set, callbacks=[tensorboard_callback])
+model.fit(training_set, 
+          epochs=EPOCHS, 
+          validation_data=validation_set, 
+          callbacks=[tensorboard_callback]
+)
 
 model.save(MODEL_PATH)

@@ -3,7 +3,15 @@ import keras
 
 import cv2
 import numpy as np
-from config import MODEL_PATH, CLASS_PATH, PREDICT_PATH, TRAINING_IMAGES_PATH, UNPROCESSED_IMAGES_PATH
+
+from configparser import ConfigParser
+config = ConfigParser()
+config.read("config.ini")
+MODEL_PATH = config.get("Paths", "MODEL_PATH")
+CLASS_PATH = config.get("Paths", "CLASS_PATH")
+PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
+TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
+UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
 # configures memory growth
 gpus = tf.config.list_physical_devices('GPU')
@@ -23,8 +31,8 @@ print("Processing image\n")
 im = cv2.imread(PREDICT_PATH)
 im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
-for y in range(0, 92):
-    for x in range(0, 92):
+for y in range(0, im.shape[0]):
+    for x in range(0, im.shape[1]):
         if im[y][x] < 237:
             im[y][x] = 1
         else:
