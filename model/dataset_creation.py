@@ -1,30 +1,35 @@
 import tensorflow as tf
 from tensorflow import keras
+
 import os
+from config import MODEL_PATH, CLASS_PATH, PREDICT_PATH, TRAINING_IMAGES_PATH, UNPROCESSED_IMAGES_PATH
 
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+# configures memory growth
+gpus = tf.config.list_physical_devices('GPU')
+try:
+    tf.config.experimental.set_memory_growth(gpus[0], True)
+except:
+    pass
 
-IMG_HEIGHT = 92
-IMG_WIDTH = 92
-BATCH_SIZE = 32
-IMAGES_PATH = "data/images_processed"
-CLASS_PATH = "model/label_keys.csv"
+BATCH_SIZE = 10
 
+# generates a csv file that contains all labels
 class_file = open(CLASS_PATH, "w")
-class_keys = sorted(os.listdir(IMAGES_PATH))
+class_keys = sorted(os.listdir(TRAINING_IMAGES_PATH))
 class_file.write(",".join(class_keys))
 
+# returns a tf.data.Dataset object with tuple (images, labels)
+# where images has shape (10, 92, 92, 1),
+# and labels are an int32 tensor of shape (batch_size,)
 print("\n====================================================================")
 print("Creating training set\n")
 training_set = keras.preprocessing.image_dataset_from_directory(
-    IMAGES_PATH,
+    TRAINING_IMAGES_PATH,
     labels="inferred",
     label_mode="int",
     color_mode="grayscale",
     batch_size=BATCH_SIZE,
-    image_size=(IMG_HEIGHT, IMG_WIDTH),
+    image_size=(92, 92),
     shuffle=True,
     seed=420,
     validation_split=0.10,
@@ -34,12 +39,12 @@ training_set = keras.preprocessing.image_dataset_from_directory(
 print("\n====================================================================")
 print("Creating validation set\n")
 validation_set = keras.preprocessing.image_dataset_from_directory(
-    IMAGES_PATH,
+    TRAINING_IMAGES_PATH,
     labels="inferred",
     label_mode="int",
     color_mode="grayscale",
     batch_size=BATCH_SIZE,
-    image_size=(IMG_HEIGHT, IMG_WIDTH),
+    image_size=(92, 92),
     shuffle=True,
     seed=420,
     validation_split=0.10,

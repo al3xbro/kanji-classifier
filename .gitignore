@@ -3,3 +3,4 @@ images_processed
 __pycache__
 logs
 kanji_ocr.h5
+label_keys.csv
