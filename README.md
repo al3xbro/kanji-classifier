@@ -1,5 +1,5 @@
 # ann-ocr-kanji
-OCR application that classifies 3000+ Japanese kanji.
+OCR application that classifies 3000+ Japanese kanji, hiragana, and katakana. Full list of characters can be accessed by running ```print_all_characters.py```.
 
 ## Dependencies:
 * Tensorflow, Keras: 2.12
@@ -22,5 +22,5 @@ Note: Follow the guide at https://www.tensorflow.org/guide/gpu to use your GPU f
 * Try writing kanji in your own handwriting and testing your model on that. Have fun!
 
 ## Resources:
-* Datasets ETL8G and ETL9G from http://etlcdb.db.aist.go.jp/ were used for training and validation.
+* Datasets ETL5, ETL8G, and ETL9G from http://etlcdb.db.aist.go.jp/ were used for training and validation.
 * Used https://github.com/choo/etlcdb-image-extractor to extract images from the datasets. Thank you!

@@ -14,7 +14,7 @@ PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
 TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
 UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
-EPOCHS = 4
+EPOCHS = 5
 
 print("\n====================================================================")
 print("Building model\n")
@@ -34,10 +34,10 @@ model.add(MaxPooling2D())
 model.add(Dropout(0.1))
 
 model.add(Flatten())
-model.add(Dense(6000, activation='relu'))
+model.add(Dense(6069, activation='relu'))
 model.add(Dropout(0.3))
 
-model.add(Dense(3040, activation='softmax'))
+model.add(Dense(3088, activation='softmax'))
 
 model.compile("adam", loss=tf.losses.SparseCategoricalCrossentropy(),
               metrics=['accuracy'])
