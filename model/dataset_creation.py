@@ -19,7 +19,7 @@ try:
 except:
     pass
 
-BATCH_SIZE = 10
+BATCH_SIZE = 20
 
 # generates a csv file that contains all labels
 class_file = open(CLASS_PATH, "w")

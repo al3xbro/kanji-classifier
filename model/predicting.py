@@ -54,3 +54,4 @@ for i in np.flipud(np.argsort(output)[-5:]):
 
 print("best guess")
 print(chr(int(class_keys[np.argmax(output)], 16)))
+
