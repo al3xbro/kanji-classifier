@@ -1,5 +1,5 @@
 # ann-ocr-kanji
-OCR application that classifies 3000+ Japanese kanji, hiragana, and katakana. Full list of characters can be accessed by running ```print_all_characters.py```.
+OCR application that classifies 3000+ Japanese kanji, hiragana, and katakana. Full list of characters can be accessed by running ```print_all_characters.py```. Webapp still in the works.
 
 ## Dependencies:
 * Tensorflow, Keras: 2.12
