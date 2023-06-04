@@ -11,6 +11,7 @@ MODEL_PATH = config.get("Paths", "MODEL_PATH")
 CLASS_PATH = config.get("Paths", "CLASS_PATH")
 
 model = keras.models.load_model(MODEL_PATH)
+
 class_file = open(CLASS_PATH, "r")
 class_keys = class_file.read().split(",")
 class_file.close()
@@ -20,7 +21,7 @@ kanjik = FastAPI()
 @kanjik.post("/")
 def predict(data:list):
 
-    # data = an array of numbers, process the data
+    # data = an array of numbers, process im
 
     output = np.squeeze(model(im, training=False))
     sorted_prob = np.flipud(np.sort(output)[-5:]).tolist()
