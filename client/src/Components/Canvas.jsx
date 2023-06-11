@@ -15,7 +15,7 @@ export default function Canvas() {
   const mutation = useMutation({
     mutationFn: async (img) => {
       return await axios({
-        url: `http://127.0.0.1:8000/upload/`,
+        url: `http://127.0.0.1:8000/upload/`, // change this later
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -73,7 +73,7 @@ export default function Canvas() {
           ref={canvas}
           canvasColor="#000000"
           style={canvasStyle}
-          strokeWidth={10}
+          strokeWidth={20}
           strokeColor="white"
         />
       </div>

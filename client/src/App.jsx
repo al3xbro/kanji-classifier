@@ -4,7 +4,9 @@ import Results from "./Components/Results.jsx";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 document.body.style = "background: black;";
+
 const queryClient = new QueryClient();
 export default function App() {
   return (
