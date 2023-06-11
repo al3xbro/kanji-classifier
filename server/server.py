@@ -65,3 +65,4 @@ async def create_upload_file(file: UploadFile = File(...)):
         "predictions":sorted_char,
         "certainty":sorted_prob
     }
+    

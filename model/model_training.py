@@ -14,12 +14,14 @@ PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
 TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
 UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
-EPOCHS = 5
+EPOCHS = 4
 
 print("\n====================================================================")
 print("Building model\n")
 
 model = Sequential()
+
+model.add(layers.R)
 
 model.add(Conv2D(16, (5, 5), 1, activation='relu', input_shape=(92, 92, 1)))
 model.add(BatchNormalization())
@@ -34,10 +36,10 @@ model.add(MaxPooling2D())
 model.add(Dropout(0.2))
 
 model.add(Flatten())
-model.add(Dense(6069, activation='relu'))
+model.add(Dense(6000, activation='relu'))
 model.add(Dropout(0.3))
 
-model.add(Dense(3088, activation='softmax'))
+model.add(Dense(2965, activation='softmax'))
 
 model.compile("adam", loss=tf.losses.SparseCategoricalCrossentropy(),
               metrics=['accuracy'])

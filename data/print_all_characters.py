@@ -9,14 +9,7 @@ PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
 TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
 UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
-charList = []
-for dataset in os.listdir(UNPROCESSED_IMAGES_PATH):
-    for label in os.listdir(os.path.join(UNPROCESSED_IMAGES_PATH, dataset)):
-        file = open(os.path.join(UNPROCESSED_IMAGES_PATH, dataset, label, ".char.txt"))
-        ch = file.read()
-        if ch not in charList:
-            charList.append(ch)
-        file.close()
+for label in sorted(os.listdir(TRAINING_IMAGES_PATH)):
+    print (chr(int(label, 16)), end=" ")
 
-print(sorted(charList))
-print("Total: " + str(len(charList)) + " characters")
+print("\nTotal: " + str(len(os.listdir(TRAINING_IMAGES_PATH))) + " characters")

@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras.layers import RandomZoom, RandomTranslation, RandomRotation
 
 import os
 
@@ -29,6 +30,14 @@ class_file.write(",".join(class_keys))
 print("\n====================================================================")
 print("Creating training set\n")
 
+data_augmentation = keras.Sequential(
+    [
+        RandomZoom(0, 0.3),
+        RandomTranslation((-0.2, 0.2),(-0.2, 0.2)),
+        RandomRotation(0.025),
+    ]
+)
+
 # returns a tf.data.Dataset object with tuple (images, labels)
 # where images has shape (10, 92, 92, 1),
 # and labels are an int32 tensor of shape (batch_size,)
@@ -43,6 +52,11 @@ training_set = keras.preprocessing.image_dataset_from_directory(
     seed=420,
     validation_split=0.10,
     subset="training"
+)
+
+# augment data for better predictions
+training_set = training_set.map(
+    lambda x, y: (data_augmentation(x, training=True), y)
 )
 
 print("\n====================================================================")
