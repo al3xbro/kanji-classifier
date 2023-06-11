@@ -21,8 +21,6 @@ print("Building model\n")
 
 model = Sequential()
 
-model.add(layers.R)
-
 model.add(Conv2D(16, (5, 5), 1, activation='relu', input_shape=(92, 92, 1)))
 model.add(BatchNormalization())
 model.add(PReLU())
