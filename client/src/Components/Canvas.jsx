@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useStore } from "../useStore"
 const canvasStyle = {
   border: "0.0625rem solid #ffffff",
   borderRadius: "0.25rem",
@@ -24,10 +25,10 @@ export default function Canvas() {
       });
     },
     onSuccess: (e) => {
-      console.log(e);
+      useStore.setState({ predict: e.data.predictions, char: e.data.certainty });
     },
     onError: (e) => {
-      console.log(e);
+      alert(e);
     },
   });
   const canvas = useRef();
@@ -81,6 +82,7 @@ export default function Canvas() {
         <div className="row">
           <div className="col">
             <button
+              disabled={mutation.isLoading}
               id="classify"
               onClick={async () => {
                 const image = await canvas.current.exportImage("png");
@@ -97,15 +99,17 @@ export default function Canvas() {
                 mutation.mutate(formData);
               }}
             >
-              Classify!
+              {mutation.isLoading ? "Loading..." : "Classify!"}
             </button>
           </div>
           <div className="col">
             <button id="undo" onClick={canvas.current.undo}>
               Undo
             </button>
-            <button id="clear" onClick={canvas.current.resetCanvas}>
-              {" "}
+            <button id="clear" onClick={() => {
+              canvas.current.resetCanvas()
+              useStore.setState({ predict: null, char: null })
+            }}>
               Clear
             </button>
           </div>

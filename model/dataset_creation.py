@@ -20,7 +20,7 @@ try:
 except:
     pass
 
-BATCH_SIZE = 16
+BATCH_SIZE = 8
 
 # generates a csv file that contains all labels
 class_file = open(CLASS_PATH, "w")
@@ -32,8 +32,8 @@ print("Creating training set\n")
 
 data_augmentation = keras.Sequential(
     [
-        RandomZoom(0, 0.3),
-        RandomTranslation((-0.2, 0.2),(-0.2, 0.2)),
+        RandomZoom(0, 0.25),
+        RandomTranslation((-0.1, 0.1),(-0.1, 0.1)),
         RandomRotation(0.025),
     ]
 )
@@ -73,4 +73,8 @@ validation_set = keras.preprocessing.image_dataset_from_directory(
     seed=420,
     validation_split=0.10,
     subset="validation"
+)
+
+validation_set = validation_set.map(
+    lambda x, y: (data_augmentation(x, training=True), y)
 )

@@ -31,11 +31,11 @@ model.add(Conv2D(32, (5, 5), 1, activation='relu'))
 model.add(BatchNormalization())
 model.add(PReLU())
 model.add(MaxPooling2D())
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 
 model.add(Flatten())
 model.add(Dense(6000, activation='relu'))
-model.add(Dropout(0.3))
+model.add(Dropout(0.2))
 
 model.add(Dense(2965, activation='softmax'))
 
