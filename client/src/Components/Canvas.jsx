@@ -16,7 +16,7 @@ export default function Canvas() {
   const mutation = useMutation({
     mutationFn: async (img) => {
       return await axios({
-        url: `http://127.0.0.1:8000/upload/`, // change this later
+        url: `http://alexserver.sytes.net:8000/upload/`,
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -25,7 +25,7 @@ export default function Canvas() {
       });
     },
     onSuccess: (e) => {
-      useStore.setState({ predict: e.data.predictions, char: e.data.certainty });
+      useStore.setState({ predict: e.data.predictions, cert: e.data.certainty });
     },
     onError: (e) => {
       alert(e);
@@ -108,7 +108,7 @@ export default function Canvas() {
             </button>
             <button id="clear" onClick={() => {
               canvas.current.resetCanvas()
-              useStore.setState({ predict: null, char: null })
+              useStore.setState({ predict: null, cert: null })
             }}>
               Clear
             </button>

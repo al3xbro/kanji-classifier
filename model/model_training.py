@@ -14,20 +14,20 @@ PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
 TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
 UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
-EPOCHS = 4
+EPOCHS = 5
 
 print("\n====================================================================")
 print("Building model\n")
 
 model = Sequential()
 
-model.add(Conv2D(16, (5, 5), 1, activation='relu', input_shape=(92, 92, 1)))
+model.add(Conv2D(16, (3, 3), 1, activation='relu', input_shape=(92, 92, 1)))
 model.add(BatchNormalization())
 model.add(PReLU())
 model.add(MaxPooling2D())
 model.add(Dropout(0.1))
 
-model.add(Conv2D(32, (5, 5), 1, activation='relu'))
+model.add(Conv2D(32, (3, 3), 1, activation='relu'))
 model.add(BatchNormalization())
 model.add(PReLU())
 model.add(MaxPooling2D())
