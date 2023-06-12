@@ -16,7 +16,7 @@ export default function Canvas() {
   const mutation = useMutation({
     mutationFn: async (img) => {
       return await axios({
-        url: `http://alexserver.sytes.net:8000/upload/`,
+        url: `http://localhost:8000/upload`,
         headers: {
           "Content-Type": "multipart/form-data",
         },

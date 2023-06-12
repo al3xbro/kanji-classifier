@@ -23,7 +23,7 @@ class_file.close()
 app = FastAPI()
 
 origins = [
-    "https://www.al3xbro.me/"
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
@@ -35,7 +35,7 @@ app.add_middleware(
 )
 
 @app.post("/upload/")
-async def create_upload_file(file: UploadFile = File(...), context):
+async def create_upload_file(file: UploadFile = File(...)):
 
     im = cv2.imdecode(np.frombuffer(file.file.read(), np.uint8), cv2.IMREAD_COLOR)
     im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)

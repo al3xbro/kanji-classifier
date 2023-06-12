@@ -20,7 +20,7 @@ try:
 except:
     pass
 
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 
 # generates a csv file that contains all labels
 class_file = open(CLASS_PATH, "w")
@@ -33,13 +33,13 @@ print("Creating training set\n")
 data_augmentation = keras.Sequential(
     [
         RandomZoom(0, 0.25),
-        RandomTranslation((-0.1, 0.1),(-0.1, 0.1)),
-        RandomRotation(0.025),
+        RandomTranslation((-0.15, 0.15),(-0.15, 0.15)),
+        RandomRotation(0.02),
     ]
 )
 
 # returns a tf.data.Dataset object with tuple (images, labels)
-# where images has shape (10, 92, 92, 1),
+# where images has shape (BATCH_SIZE, 92, 92, 1),
 # and labels are an int32 tensor of shape (batch_size,)
 training_set = keras.preprocessing.image_dataset_from_directory(
     TRAINING_IMAGES_PATH,
