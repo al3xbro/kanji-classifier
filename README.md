@@ -8,14 +8,14 @@ OCR application that classifies almost 3000 Japanese kanji. Full list of charact
 Note: Follow the guide at https://www.tensorflow.org/guide/gpu to use your GPU for training
 
 ## Performance:
-* **94%** accuracy for both validation and training sets.
-* **0.23** training loss and **0.26** validation loss.
+* **92%** accuracy for both validation and training sets.
+* **0.18** training loss and **0.21** validation loss.
 
 ## To Train:
 1. Download an image dataset of your choice.
 2. Modify the ```config.py``` file to contain the correct paths.
 3. Run the ```image_preprocessing.py``` script to process images.
-4. Run the ```delete_hiragana``` script to remove hiragana from the dataset.
+4. Run the ```delete_hiragana.py``` script to remove hiragana from the dataset.
 5. Run the ```model_training.py``` script to train your model.
 
 ## Testing:
