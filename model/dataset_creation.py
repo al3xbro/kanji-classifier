@@ -20,7 +20,7 @@ try:
 except:
     pass
 
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 
 # generates a csv file that contains all labels
 class_file = open(CLASS_PATH, "w")
@@ -33,7 +33,7 @@ print("Creating training set\n")
 data_augmentation = keras.Sequential(
     [
         RandomZoom(0, 0.25),
-        RandomTranslation((-0.15, 0.15),(-0.15, 0.15)),
+        RandomTranslation((-0.1, 0.1),(-0.1, 0.1)),
         RandomRotation(0.02),
     ]
 )

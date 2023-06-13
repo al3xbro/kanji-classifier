@@ -15,7 +15,7 @@ PREDICT_PATH = config.get("Paths", "PREDICT_PATH")
 TRAINING_IMAGES_PATH = config.get("Paths", "TRAINING_IMAGES_PATH")
 UNPROCESSED_IMAGES_PATH = config.get("Paths", "UNPROCESSED_IMAGES_PATH")
 
-EPOCHS = 10
+EPOCHS = 20
 
 print("\n====================================================================")
 print("Building model\n")
@@ -36,7 +36,7 @@ model.add(Dropout(0.1))
 
 model.add(Flatten())
 model.add(Dense(6000, activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 
 model.add(Dense(2965, activation='softmax'))
 
