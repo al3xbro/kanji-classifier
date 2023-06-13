@@ -1,3 +1,5 @@
+# CD INTO SERVER AND RUN uvicorn server:app --reload
+
 import tensorflow as tf
 import keras
 import numpy as np
@@ -5,9 +7,7 @@ import cv2
 import os
 
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from fastapi import FastAPI, UploadFile, File
-import matplotlib.pyplot as plt
 
 from configparser import ConfigParser
 config = ConfigParser()
@@ -23,7 +23,7 @@ class_file.close()
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173"
+    "https://www.al3xbro.me"
 ]
 
 app.add_middleware(
