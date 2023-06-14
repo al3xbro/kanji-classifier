@@ -4,23 +4,19 @@ import tensorflow as tf
 import keras
 import numpy as np
 import cv2
-import os
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File
+import uvicorn
+import mangum
 
-from configparser import ConfigParser
-config = ConfigParser()
-config.read("../config.ini")
-MODEL_PATH = os.path.join("..", config.get("Paths", "MODEL_PATH"))
-CLASS_PATH = os.path.join("..", config.get("Paths", "CLASS_PATH"))
-
-model = keras.models.load_model(MODEL_PATH)
-class_file = open(CLASS_PATH, "r")
+model = keras.models.load_model("kanji_ocr.h5")
+class_file = open("label_keys.csv", "r")
 class_keys = class_file.read().split(",")
 class_file.close()
 
 app = FastAPI()
+handler = mangum.Mangum(app)
 
 origins = [
     "https://www.al3xbro.me"
@@ -66,3 +62,5 @@ async def create_upload_file(file: UploadFile = File(...)):
         "certainty":sorted_prob
     }
     
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
