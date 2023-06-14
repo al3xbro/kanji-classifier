@@ -1,7 +1,7 @@
 # CD INTO SERVER AND RUN uvicorn server:app --reload
 
-import tensorflow as tf
-import keras
+from tensorflow import lite
+from tensorflow import image as tfimage
 import numpy as np
 import cv2
 
@@ -10,7 +10,12 @@ from fastapi import FastAPI, UploadFile, File
 import uvicorn
 import mangum
 
-model = keras.models.load_model("kanji_ocr.h5")
+interpreter = lite.Interpreter(model_path="kanji_ocr.tflite")
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
 class_file = open("label_keys.csv", "r")
 class_keys = class_file.read().split(",")
 class_file.close()
@@ -45,10 +50,14 @@ async def create_upload_file(file: UploadFile = File(...)):
                 im[y][x] = 1
 
     im = np.atleast_3d(im)
-    im = tf.image.resize(im, [92, 92])
+    im = tfimage.resize(im, [92, 92])
     im = np.expand_dims(im, 0)
+    
+    interpreter.set_tensor(input_details[0]['index'], im)
+    interpreter.invoke()
+    output = interpreter.get_tensor(output_details[0]['index'])[0]
 
-    output = np.squeeze(model(im, training=False))
+    print(type(output))
     sorted_prob = np.flipud(np.sort(output)[-5:]).tolist()
     sorted_char = []
 
