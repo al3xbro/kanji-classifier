@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.12.0
+FROM public.ecr.aws/lambda/python:3.8
 
 WORKDIR /app
 
@@ -10,4 +10,4 @@ COPY label_keys.csv .
 RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 COPY server.py ${LAMBDA_TASK_ROOT}
 
-CMD [ "app.handler" ]
+CMD [ "server.handler" ]
