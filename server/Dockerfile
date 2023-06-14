@@ -10,4 +10,4 @@ COPY label_keys.csv .
 RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 COPY server.py ${LAMBDA_TASK_ROOT}
 
-CMD [ "server.handler" ]
+CMD [ "app.handler" ]
