@@ -3,6 +3,7 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useStore } from "../useStore"
+
 const canvasStyle = {
   border: "0.0625rem solid #ffffff",
   borderRadius: "0.25rem",
@@ -16,7 +17,7 @@ export default function Canvas() {
   const mutation = useMutation({
     mutationFn: async (img) => {
       return await axios({
-        url: `https://pddaswalsmflhprj7nh3dcc7zi0nqldj.lambda-url.us-east-1.on.aws/`,
+        url: `http://alexserver.sytes.net:8000/predict`,
         timeout: 300000,
         headers: {
           "Content-Type": "multipart/form-data",

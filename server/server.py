@@ -8,7 +8,6 @@ import cv2
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
-import mangum
 
 interpreter = lite.Interpreter(model_path="kanji_ocr.tflite")
 interpreter.allocate_tensors()
@@ -21,7 +20,6 @@ class_keys = class_file.read().split(",")
 class_file.close()
 
 app = FastAPI()
-handler = mangum.Mangum(app)
 
 origins = [
     "https://www.al3xbro.me"
@@ -29,13 +27,13 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=origins,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.post("/")
+@app.post("/predict")
 async def create_upload_file(file: UploadFile = File(...)):
 
     im = cv2.imdecode(np.frombuffer(file.file.read(), np.uint8), cv2.IMREAD_COLOR)
@@ -73,4 +71,4 @@ async def create_upload_file(file: UploadFile = File(...)):
     }
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, port=8000)
