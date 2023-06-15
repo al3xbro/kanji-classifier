@@ -16,7 +16,7 @@ export default function Canvas() {
   const mutation = useMutation({
     mutationFn: async (img) => {
       return await axios({
-        url: `https://xpwq36r3ucmxldfrjv6hjxe7cu0yyafw.lambda-url.us-east-1.on.aws/upload`,
+        url: `https://pddaswalsmflhprj7nh3dcc7zi0nqldj.lambda-url.us-east-1.on.aws/upload`,
         timeout: 300000,
         headers: {
           "Content-Type": "multipart/form-data",

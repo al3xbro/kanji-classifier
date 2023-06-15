@@ -23,17 +23,17 @@ class_file.close()
 app = FastAPI()
 handler = mangum.Mangum(app)
 
-origins = [
-    "https://www.al3xbro.me"
-]
+# origins = [
+#     "https://www.al3xbro.me"
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 @app.post("/upload/")
 async def create_upload_file(file: UploadFile = File(...)):
