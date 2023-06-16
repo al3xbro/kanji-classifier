@@ -7,9 +7,8 @@ import { useStore } from "../useStore"
 const canvasStyle = {
   border: "0.0625rem solid #ffffff",
   borderRadius: "0.25rem",
-  margin: "2px",
   marginBottom: "20px",
-  width: "100%",
+  width: "95%",
   aspectRatio: "1 / 1",
 };
 
