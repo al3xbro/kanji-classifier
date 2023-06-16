@@ -1,4 +1,4 @@
-# ann-ocr-kanji
+# kanji-classifier
 OCR application that classifies almost 3000 Japanese kanji. Full list of characters can be accessed by running ```print_all_characters.py```.
 
 ## Dependencies:
