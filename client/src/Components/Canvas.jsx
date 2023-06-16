@@ -7,6 +7,7 @@ import { useStore } from "../useStore"
 const canvasStyle = {
   border: "0.0625rem solid #ffffff",
   borderRadius: "0.25rem",
+  margin: "auto",
   marginBottom: "20px",
   width: "95%",
   aspectRatio: "1 / 1",
@@ -103,8 +104,6 @@ export default function Canvas() {
             >
               {mutation.isLoading ? "Loading..." : "Classify!"}
             </button>
-          </div>
-          <div className="col">
             <button id="undo" onClick={canvas.current.undo}>
               Undo
             </button>
