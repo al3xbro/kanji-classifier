@@ -22,7 +22,7 @@ class_file.close()
 app = FastAPI()
 
 origins = [
-    "https://www.al3xbro.me"
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
