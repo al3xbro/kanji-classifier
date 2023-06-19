@@ -55,7 +55,6 @@ async def create_upload_file(file: UploadFile = File(...)):
     interpreter.invoke()
     output = interpreter.get_tensor(output_details[0]['index'])[0]
 
-    print(type(output))
     sorted_prob = np.flipud(np.sort(output)[-5:]).tolist()
     sorted_char = []
 
@@ -64,7 +63,6 @@ async def create_upload_file(file: UploadFile = File(...)):
     for i in range(0, 5):
         sorted_prob[i] = "{:.2f}".format(sorted_prob[i])
 
-    print("request complete")
     return {
         "predictions":sorted_char,
         "certainty":sorted_prob
