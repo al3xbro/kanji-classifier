@@ -18,7 +18,7 @@ export default function Canvas() {
     const mutation = useMutation({
         mutationFn: async (img) => {
             return await axios({
-                url: `http://alexserver.sytes.net:8000/predict`,
+                url: `https://alexserver.sytes.net:8000/predict`,
                 timeout: 300000,
                 headers: {
                     "Content-Type": "multipart/form-data",
