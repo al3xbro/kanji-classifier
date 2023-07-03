@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/python:3.8
+FROM tensorflow/tensorflow:2.12.0
 
 WORKDIR /app
 
@@ -7,7 +7,8 @@ COPY server.py .
 COPY kanji_ocr.tflite .
 COPY label_keys.csv .
 
-RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
-COPY server.py ${LAMBDA_TASK_ROOT}
+EXPOSE 8000
 
-CMD [ "server.handler" ]
+RUN  pip install -r requirements.txt 
+
+CMD [ "python", "server.py" ]
