@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useStore } from "../useStore"
+import { useStore } from "../app/useStore"
 
 const canvasStyle = {
     border: "0.0625rem solid #ffffff",
@@ -18,7 +18,7 @@ export default function Canvas() {
     const mutation = useMutation({
         mutationFn: async (img) => {
             return await axios({
-                url: `http://alexserver.sytes.net:8000/predict`,
+                url: `/api/test`,
                 timeout: 300000,
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -97,6 +97,7 @@ export default function Canvas() {
                                 }
                                 let blob = new Blob([arrayData.buffer], { type: "image/png" });
                                 let file = new File([blob], "image.png", { type: "image/png" });
+
                                 let formData = new FormData();
                                 formData.append("file", file);
                                 mutation.mutate(formData);

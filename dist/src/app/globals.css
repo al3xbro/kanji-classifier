@@ -1,0 +1,60 @@
+#classify {
+    width: 46%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: black;
+    color: white;
+    border: white solid 1px;
+    border-radius: 5px;
+}
+
+#classify:active {
+    background-color: #303030;
+}
+
+#undo {
+    width: 21%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: black;
+    color: white;
+    border: white solid 1px;
+    border-radius: 5px;
+}
+
+#undo:active {
+    background-color: #303030;
+}
+
+#clear {
+    width: 21%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: black;
+    color: white;
+    border: white solid 1px;
+    border-radius: 5px;
+}
+
+#clear:active {
+    background-color: #303030;
+}
+
+#best-guess {
+    padding-top: 7px;
+    text-align: center;
+    font-size: 100px;
+    color: white;
+}
+
+#best-certainty {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-family: Montserrat;
+    font-weight: bold;
+}
