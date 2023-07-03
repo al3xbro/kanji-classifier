@@ -1,5 +1,7 @@
 #classify {
-    width: 100%;
+    width: 46%;
+    margin-left: 2%;
+    margin-right: 2%;
     background-color: black;
     color: white;
     border: white solid 1px;
@@ -11,8 +13,9 @@
 }
 
 #undo {
-    margin-right: 5%;
-    width: 46%;
+    width: 21%;
+    margin-left: 2%;
+    margin-right: 2%;
     background-color: black;
     color: white;
     border: white solid 1px;
@@ -24,8 +27,9 @@
 }
 
 #clear {
-    margin-left: 1%;
-    width: 46%;
+    width: 21%;
+    margin-left: 2%;
+    margin-right: 2%;
     background-color: black;
     color: white;
     border: white solid 1px;
@@ -37,14 +41,14 @@
 }
 
 #best-guess {
-    padding-top: 40px;
+    padding-top: 7px;
     text-align: center;
     font-size: 100px;
     color: white;
 }
 
 #best-certainty {
-    font-family: Montserrat;
+    font-family: "Montserrat", sans-serif;
     text-align: center;
     color: white;
 }
