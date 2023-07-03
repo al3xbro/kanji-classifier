@@ -6,7 +6,7 @@ export default function Results() {
             {cert && predict && cert.map((item, index) => {
                 return <>
                     <div id="best-guess">{predict[index]}</div>
-                    <div id="best-certainty">{item * 100 + "%"}</div></>
+                    <div id="best-certainty">{(Math.round(item * 100) / 100).toFixed(2) + "%"}</div></>
             })}
         </div>
     )
