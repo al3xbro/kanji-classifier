@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-.montserrat {
-    font-family: 'Montserrat';
-}
-
 #classify {
     width: 46%;
     margin-left: 2%;
@@ -14,8 +10,14 @@
     border-radius: 5px;
 }
 
-#classify:active {
+#classify-active {
+    width: 46%;
+    margin-left: 2%;
+    margin-right: 2%;
     background-color: #303030;
+    color: white;
+    border: white solid 1px;
+    border-radius: 5px;
 }
 
 #undo {
@@ -37,6 +39,7 @@
     margin-left: 2%;
     margin-right: 2%;
     background-color: black;
+    font-family: "Montserrat", sans-serif;
     color: white;
     border: white solid 1px;
     border-radius: 5px;
@@ -47,6 +50,8 @@
 }
 
 #best-guess {
+    display: block;
+    text-decoration: none;
     padding-top: 7px;
     text-align: center;
     font-size: 100px;
@@ -61,6 +66,6 @@
 
 .navbar-brand {
     font-size: 24px;
-    font-family: Montserrat;
+    font-family: "Montserrat";
     font-weight: bold;
 }

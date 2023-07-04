@@ -15,6 +15,8 @@ const canvasStyle = {
 
 export default function Canvas() {
     const [loaded, setLoaded] = useState(false);
+
+    // calls an API and sets global store to response
     const mutation = useMutation({
         mutationFn: async (img) => {
             return await axios({
@@ -37,18 +39,23 @@ export default function Canvas() {
             alert(e);
         },
     });
+
     const canvas = useRef();
+
+    // making sure Canvas is loaded
     useEffect(() => {
         setLoaded(true);
     }, []);
     const [canFire, setCanFire] = useState(true);
 
+    // ctrl + z and ctrl + y handler 
     const keydownHandler = (e) => {
         if (e.ctrlKey && e.key === "z") {
             if (canFire) {
                 setCanFire(false);
                 canvas.current.undo();
 
+                // disables ctrl + z to prevent multiple calls
                 setTimeout(() => {
                     setCanFire(true);
                 }, 1);
@@ -59,6 +66,7 @@ export default function Canvas() {
                 setCanFire(false);
                 canvas.current.redo();
 
+                // disables ctrl + y to prevent multiple calls
                 setTimeout(() => {
                     setCanFire(true);
                 }, 1);
@@ -66,6 +74,7 @@ export default function Canvas() {
         }
     };
 
+    // adds and removes event listener on canFire change
     useEffect(() => {
         window.addEventListener("keydown", keydownHandler);
         return () => {
@@ -84,14 +93,16 @@ export default function Canvas() {
                     strokeColor="white"
                 />
             </div>
+
+            {/* only loads buttons after Canvas */}
             {loaded ? (
                 <div className="row">
                     <div className="col">
                         <button
-                            className="montserrat"
+                            id={mutation.isLoading ? "classify-active" : "classify"}
                             disabled={mutation.isLoading}
-                            id="classify"
                             onClick={async () => {
+                                // processes input and calls mutate
                                 const image = await canvas.current.exportImage("png");
                                 const imageBase64 = image.split(",")[1];
                                 const blobData = atob(imageBase64);
@@ -109,11 +120,10 @@ export default function Canvas() {
                         >
                             {mutation.isLoading ? "Loading..." : "Classify!"}
                         </button>
-                        <button className="montserrat" id="undo" onClick={canvas.current.undo}>
+                        <button id="undo" onClick={canvas.current.undo}>
                             Undo
                         </button>
                         <button
-                            className="montserrat"
                             id="clear"
                             onClick={() => {
                                 canvas.current.resetCanvas();

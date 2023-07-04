@@ -1,5 +1,3 @@
-# CD INTO SERVER AND RUN uvicorn server:app --reload
-
 from tensorflow import lite
 from tensorflow import image as tfimage
 import numpy as np
@@ -22,20 +20,21 @@ class_file.close()
 app = FastAPI()
 
 origins = [
-    "https://www.al3xbro.me"
+    "https://kanji.al3xbro.me/predict"
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["POST"],
     allow_headers=["*"],
 )
 
 @app.post("/predict")
 async def create_upload_file(file: UploadFile = File(...)):
 
+    # processes image
     im = cv2.imdecode(np.frombuffer(file.file.read(), np.uint8), cv2.IMREAD_COLOR)
     im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     file.close()
@@ -51,10 +50,12 @@ async def create_upload_file(file: UploadFile = File(...)):
     im = tfimage.resize(im, [92, 92])
     im = np.expand_dims(im, 0)
     
+    # prediction
     interpreter.set_tensor(input_details[0]['index'], im)
     interpreter.invoke()
     output = interpreter.get_tensor(output_details[0]['index'])[0]
 
+    # prepares response
     sorted_prob = np.flipud(np.sort(output)[-5:]).tolist()
     sorted_char = []
 
