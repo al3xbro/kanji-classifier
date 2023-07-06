@@ -49,18 +49,24 @@
     background-color: #303030;
 }
 
-#best-guess {
+#guesses {
     display: block;
     text-decoration: none;
-    padding-top: 7px;
+    padding-top: 0px;
     text-align: center;
     font-size: 100px;
     color: white;
+    border-radius: 10px;
 }
 
-#best-certainty {
+#guesses:hover {
+    background-color: #303030;
+}
+
+#certainty {
     font-family: "Montserrat", sans-serif;
     text-align: center;
+    margin: 2px;
     color: white;
 }
 
