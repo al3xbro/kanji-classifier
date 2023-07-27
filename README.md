@@ -23,5 +23,5 @@ Note: Follow the guide at https://www.tensorflow.org/guide/gpu to use your GPU f
 * Try writing kanji in your own handwriting and testing your model on that. Have fun!
 
 ## Resources:
-* Datasets ETL8G and ETL9G from http://etlcdb.db.aist.go.jp/ were used for training and validation.
-* Used https://github.com/choo/etlcdb-image-extractor to extract images from these datasets. Thank you!
+* Datasets ETL8G and ETL9G from [etlcdb](http://etlcdb.db.aist.go.jp/) were used for training and validation.
+* Used [etlcdb-image-extractor](https://github.com/choo/etlcdb-image-extractor) to extract images from these datasets. Thank you!
