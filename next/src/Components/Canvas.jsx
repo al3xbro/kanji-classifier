@@ -1,3 +1,4 @@
+"use client"
 import { useRef, useEffect, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useMutation } from "@tanstack/react-query";

@@ -31,11 +31,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.post("/predict")
 async def create_upload_file(file: UploadFile = File(...)):
 
     # processes image
-    im = cv2.imdecode(np.frombuffer(file.file.read(), np.uint8), cv2.IMREAD_COLOR)
+    im = cv2.imdecode(np.frombuffer(
+        file.file.read(), np.uint8), cv2.IMREAD_COLOR)
     im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     file.close()
 
@@ -49,7 +51,7 @@ async def create_upload_file(file: UploadFile = File(...)):
     im = np.atleast_3d(im)
     im = tfimage.resize(im, [92, 92])
     im = np.expand_dims(im, 0)
-    
+
     # prediction
     interpreter.set_tensor(input_details[0]['index'], im)
     interpreter.invoke()
@@ -65,9 +67,9 @@ async def create_upload_file(file: UploadFile = File(...)):
         sorted_prob[i] = "{:.2f}".format(sorted_prob[i])
 
     return {
-        "predictions":sorted_char,
-        "certainty":sorted_prob
+        "predictions": sorted_char,
+        "certainty": sorted_prob
     }
-    
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
